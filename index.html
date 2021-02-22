@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Canvas в HTML5</title>
+    <link rel="stylesheet" href="main.js">
+
+</head>
+    <body>
+    <button id="1">текст</button>
+    <button id="2">TODO</button>
+    <button id="3">рисовалка мышкой</button>
+    <button id="4">стирка</button><br>
+    <canvas id="myCanvas" width="400 " height="400" style="background-color:#eee; border: 1px solid #ccc;">
+        ваш браузер не поддерживает Canvas
+    </canvas>
+    <script>
+        let canvas = document.getElementById("myCanvas");
+        let ctx = canvas.getContext("2d");
+
+        var text=false;
+        var todo=false;
+        var paint=false;
+        var cliner=false;
+
+        var textBt=document.getElementById('1');
+        var todoBt=document.getElementById('2');
+        var paintBt=document.getElementById('3');
+        var clinerBt=document.getElementById('4');
+
+
+        textBt.onclick=function (){
+            text=true;
+            todo=false;
+            paint=false;
+            cliner=false;
+        }
+
+        todoBt.onclick=function (){
+            text=false;
+            todo=true;
+            paint=false;
+            cliner=false;
+        }
+
+        paintBt.onclick=function (){
+            text=false;
+            todo=false;
+            paint=true;
+            cliner=false;
+        }
+
+        clinerBt.onclick=function (){
+            text=false;
+            todo=false;
+            paint=false;
+            cliner=true;
+        }
+
+        canvas.onmousedown=function () {
+            if(paint) {
+                canvas.onmousemove = function (event) {
+                    var x = event.offsetX;
+                    var y = event.offsetY;
+                    ctx.fillRect(x, y, 10, 10);
+                }
+                canvas.onmouseup = function () {
+                    canvas.onmousemove = null;
+                }
+            }
+        }
+
+        canvas.onmouseover=function (){
+            console.log(this.onclick());
+        }
+    </script>
+</body>
+</html>
